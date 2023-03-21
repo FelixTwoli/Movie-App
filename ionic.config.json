@@ -1,0 +1,7 @@
+{
+  "name": "feloxyapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
