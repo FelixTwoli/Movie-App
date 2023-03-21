@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Trending Movies</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item button *ngFor="let item of movies">
+      <ion-avatar slot="start">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" alt="movie image" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{item.title}}</h2>
+        <p>{{item.release_date | date: 'y'}}</p>
+        <p>{{item.overview}}</p>
+      </ion-label>
+          <ion-badge slot='end' color="primary">{{item.vote_average}}</ion-badge>
+    </ion-item>
+  </ion-list>
+</ion-content>
