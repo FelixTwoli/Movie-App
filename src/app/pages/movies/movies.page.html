@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item button *ngFor="let item of movies">
+    <ion-item button *ngFor="let item of movies" [routerLink]="['item.id']" routerLinkActive="router-link-active" >
       <ion-avatar slot="start">
         <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" alt="movie image" />
       </ion-avatar>
@@ -18,4 +18,10 @@
           <ion-badge slot='end' color="primary">{{item.vote_average}}</ion-badge>
     </ion-item>
   </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore()">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles">
+  </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

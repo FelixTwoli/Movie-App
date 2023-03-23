@@ -3,6 +3,8 @@ import { LoadingController } from '@ionic/angular';
 import { SPINNERS } from '@ionic/core/dist/types/components/spinner/spinner-configs';
 import { MovieService } from 'src/app/services/movie.service';
 import { Movie } from './../../services/movie.service';
+import { InfiniteScrollCustomEvent } from '@ionic/core';
+
 
 @Component({
   selector: 'app-movies',
@@ -22,7 +24,7 @@ export class MoviesPage implements OnInit {
     this.loadMovies();
   }
 
-  async loadMovies() {
+  async loadMovies(event?: InfiniteScrollCustomEvent) {
     const loading = await this.loadingCtr.create({
       message: 'Loading Movies',
       spinner: 'bubbles',
@@ -33,8 +35,20 @@ export class MoviesPage implements OnInit {
       .getPopularMovies(this.currentPage)
       .subscribe((res: any) => {
         loading.dismiss();
-        this.movies = [...this.movies, ...res.results];
+        //this.movies = [...this.movies, ...res.results];
+        this.movies.push(...res.results);
         console.log(res);
+
+        if (event) {
+          event.target.complete();
+        }
       });
   }
+
+  loadMore(event?: InfiniteScrollCustomEvent) {
+    this.currentPage++;
+    this.loadMovies(event);
+
+  }
+
 }

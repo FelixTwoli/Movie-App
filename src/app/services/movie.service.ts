@@ -15,6 +15,7 @@ export interface Movie {
   overview: string;
   vote_average: number;
   poster_path: string;
+  imageBaseUrl: string;
 
 
 };
@@ -30,7 +31,7 @@ export class MovieService {
   getPopularMovies(page = 1): Observable <Movie> {
     return this.http.get<Movie>
     (`${environment.baseUrl}/movie/popular?api_key=${environment.apiKey}&page=${page}`);
-    
+
   }
 
   getMovieDetails(id: string) {
